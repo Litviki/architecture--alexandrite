@@ -1,0 +1,75 @@
+Мотивация
+ Система мониторинга позволит:
+  1. В on-line режиме отслеживать основные показатели (бизнес и технические) системы
+  2. Предсказывать ошибки и выполнять проактивные действия по их устранению
+  3. Быстро выявлять ошибки и выполнять действия по их устранению
+  4. Повысить отказоустойчивость системы
+  5. Сократить расходы на поддержку ПО
+  6. Увеличить скорость решения проблем
+  7. Снизить количество ошибок
+  8. Снизить время простоя системы
+  9. Увеличить доступность системы
+  10. Повысить производительность
+  11. Повысить безопасность
+  12. Даст аналитические данные для улучшения бизнес-процессов компании
+ 13. Даст аналитические данные для бизнес инсайты
+
+Выбор подхода к мониторингу
+ Mes, Mes API, CRM API
+  USE
+   Utilization
+   Error
+   Saturation (MessageQueue)
+  RED
+   Requests Rate 
+   Duration 
+ CRM и InternetShop
+  «Четыре золотых сигнала» 
+   Задержка
+   Трафик 
+   Ошибки 
+   Насыщенность
+ Все Storage
+   Utilization
+   Ошибки 
+   Насыщенность
+
+Метрики, которые нужно отслеживать:
+ Метрика: RabbitMQ 
+ Ярлыки:
+  Number of dead-letter-exchange letters in RabbitMQ
+  Number of message in flight in RabbitMQ
+ Метрика: CPU %
+ Ярлыки
+  CPU % for CRM API
+  CPU % for MES API
+  CPU % for shop db instance
+  CPU % for MES db instance
+ Метрика: DB Usage
+ Ярлыки:  
+  Size of S3 storage
+  Size of shop db instance
+  Size of MES db instance
+ Метрика: Memory Utilisation
+ Ярлыки: 
+  Memory Utilisation for CRM API
+  Memory Utilisation for MES API
+ Метрика: RPS 
+ Ярлыки: 
+  RPS for CRM API
+  RPS for MES API
+  RPS user for CRM API
+  RPS user for MES API
+ Метрика: API Error
+ Ярлыки:  
+  Number of HTTP 500 for shop API
+  Number of HTTP 500 for CRM API
+  Number of HTTP 500 for MES API
+
+План действий
+ 1. В сервисы Shop_API, CRM_API, MES_API встраиваем метрики (Счётчик, Индикатор, Гистограмма, Сводка) через exporter'ы  
+ 2. Развертываем Prometheus
+ 3. Прописываем в Prometheus точки подключения к сервисам
+ 4. Развертываем Grafana
+ 5. Прописываем в конфигурации сервер Prometheus 
+ 6. В Grafana создаем dashboards и прописываем метрики
