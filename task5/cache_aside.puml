@@ -1,0 +1,31 @@
+@startuml
+actor User
+participant "API Gateway" as API
+participant "OrderService" as Service
+participant "Cache (Redis)" as Cache
+participant "Database" as DB
+
+== Чтение списка заказов ==
+User -> API : GET /orders
+API -> Service : getOrders()
+Service -> Cache : get("orders")
+alt Кэш-хит
+    Cache --> Service : return orders
+else Кэш-мисс
+    Cache --> Service : null
+    Service -> DB : SELECT * FROM orders
+    DB --> Service : orders
+    Service -> Cache : set("orders", orders)
+end
+Service --> API : orders
+API --> User : return orders
+
+== Обновление статуса заказа ==
+User -> API : PATCH /orders/{id}/status
+API -> Service : updateOrderStatus(id, newStatus)
+Service -> DB : UPDATE orders SET status=... WHERE id=...
+DB --> Service : OK
+Service -> Cache : invalidate("orders")
+Service --> API : OK
+API --> User : return OK
+@enduml
