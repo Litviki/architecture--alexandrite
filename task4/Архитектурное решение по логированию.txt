@@ -1,4 +1,3 @@
-
 1. Какие логи нужно собирать: 
     -InternetShop, лог работы Customer'ов 
     - CRM, лог работы Seller'ов   
